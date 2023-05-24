@@ -15,11 +15,11 @@ namespace Controllers
 
     public class CommandsAssignment : ICollection<Command>
     {
-        private readonly List<TypeCommandAndKeyCode> _commands;
+        private readonly List<Command> _commands;
         public int Count { get; private set; }
         public bool IsReadOnly => true;
 
-        public CommandsAssignment(IEnumerable<Typ> commands)
+        public CommandsAssignment(IEnumerable<Command> commands)
         {
             foreach (var command in commands) _commands.Add(command);
 
