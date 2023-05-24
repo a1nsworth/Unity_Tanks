@@ -39,12 +39,12 @@ namespace Entities
 
         public void Spin(Vector3 eulers)
         {
-            _transform.Rotate(eulers * angleRotation);
+            _transform.Rotate(eulers * AngleRotation);
         }
 
         public void Move(Vector3 direct)
         {
-            _transform.Translate(direct * movementSpeed, Space.World);
+            _transform.Translate(direct * MovementSpeed, Space.World);
         }
 
         public void MoveForward()
