@@ -1,11 +1,11 @@
 using Entities;
 using UnityEngine;
 
-namespace Controllers
+namespace Commands.TankCommands
 {
-    public class MoveForwardCommand : Command
+    public class MoveForwardTankCommand : TankCommand
     {
-        public MoveForwardCommand(KeyCode keyCode) : base(keyCode)
+        public MoveForwardTankCommand(KeyCode keyCode) : base(keyCode)
         {
         }
 

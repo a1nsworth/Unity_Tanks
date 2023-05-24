@@ -2,14 +2,14 @@ using System;
 using Entities;
 using UnityEngine;
 
-namespace Controllers
+namespace Commands.TankCommands
 {
     [Serializable]
-    public abstract class Command
+    public abstract class TankCommand
     {
         [field: SerializeField] public KeyCode KeyCode { get; set; }
 
-        protected Command(KeyCode keyCode) => KeyCode = keyCode;
+        protected TankCommand(KeyCode keyCode) => KeyCode = keyCode;
 
         public abstract void Execute(in Tank tank);
     }

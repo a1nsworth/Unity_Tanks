@@ -1,19 +1,22 @@
 using System;
+using Commands.TankCommands;
 using Entities;
 using UnityEngine;
 
 namespace Controllers
 {
-    public class MoveController : MonoBehaviour
+    public class TankCommandsController : MonoBehaviour
     {
         private Tank _tank;
 
         private void Processing()
         {
-            foreach (Command command in _tank.CommandsAssignment)
+            foreach (TankCommand command in _tank.TankCommandsAssignment)
             {
                 if (Input.GetKey(command.KeyCode))
+                {
                     command.Execute(_tank);
+                }
             }
         }
 
