@@ -25,7 +25,7 @@ namespace Controllers
             _tank = GetComponent<Tank>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             Processing();
         }

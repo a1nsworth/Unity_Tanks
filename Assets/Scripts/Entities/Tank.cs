@@ -11,8 +11,8 @@ namespace Entities
     {
         private uint Health { get; set; } = 5;
 
-        [field: SerializeField] private float MovementSpeed { get; set; } = 0.001f;
-        [field: SerializeField] private float AngleRotation { get; set; } = 0.1f;
+        [field: SerializeField] private float MovementSpeed { get; set; } = 0.05f;
+        [field: SerializeField] private float AngleRotation { get; set; } = 3f;
 
         private Transform _transform;
 
