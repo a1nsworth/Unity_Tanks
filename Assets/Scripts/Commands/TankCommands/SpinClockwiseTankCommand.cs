@@ -1,11 +1,11 @@
 using Entities;
 using UnityEngine;
 
-namespace Controllers
+namespace Commands.TankCommands
 {
-    public class SpinClockwiseCommand : Command
+    public class SpinClockwiseTankCommand : TankCommand
     {
-        public SpinClockwiseCommand(KeyCode keyCode) : base(keyCode)
+        public SpinClockwiseTankCommand(KeyCode keyCode) : base(keyCode)
         {
         }
 

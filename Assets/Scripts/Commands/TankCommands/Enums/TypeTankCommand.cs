@@ -1,6 +1,6 @@
-namespace Controllers
+namespace Commands.TankCommands.Enums
 {
-    public enum TypeCommand
+    public enum TypeTankCommand
     {
         MoveForward,
         MoveBackward,

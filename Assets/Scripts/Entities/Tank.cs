@@ -1,6 +1,10 @@
+using System;
 using System.Collections.Generic;
+using Commands.TankCommands;
+using Commands.TankCommands.Enums;
 using Controllers;
 using Interfaces;
+using TankControllers;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -15,56 +19,32 @@ namespace Entities
 
         private Transform _transform;
 
-        [SerializeField] private KeyCode moveUpKeyCode;
-        [SerializeField] private KeyCode moveDownKeyCode;
-        [SerializeField] private KeyCode spinClockwiseKeyCode;
-        [SerializeField] private KeyCode spinAntiClockwiseKeyCode;
+        [FormerlySerializedAs("TypeTankCommandAndKeyCodes")] [SerializeField]
+        private List<TypeTankCommandAndKeyCode> typeTankCommandAndKeyCodes;
 
-        public CommandsAssignment CommandsAssignment { get; private set; }
+        public TankCommandsAssignment TankCommandsAssignment { get; private set; }
 
-        void Start()
+        private void Start()
         {
-            CommandsAssignment = new CommandsAssignment(new List<Command>
-            {
-                new MoveForwardCommand(moveUpKeyCode), new MoveBackwardCommand(moveDownKeyCode),
-                new SpinClockwiseCommand(spinClockwiseKeyCode), new SpinAntiClockwiseCommand(spinAntiClockwiseKeyCode)
-            });
+            TankCommandsAssignment = new TankCommandsAssignment(typeTankCommandAndKeyCodes);
             _transform = GetComponent<Transform>();
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
         }
 
-        public void Spin(Vector3 eulers)
-        {
-            _transform.Rotate(eulers * AngleRotation);
-        }
+        public void Spin(Vector3 eulers) => _transform.Rotate(eulers * AngleRotation);
 
-        public void Move(Vector3 direct)
-        {
-            _transform.Translate(direct * MovementSpeed, Space.World);
-        }
+        public void Move(Vector3 direct) => _transform.Translate(direct * MovementSpeed, Space.World);
 
-        public void MoveForward()
-        {
-            Move(Vector3.Normalize(_transform.up));
-        }
+        public void MoveForward() => Move(Vector3.Normalize(_transform.up));
 
-        public void MoveBackward()
-        {
-            Move(Vector3.Normalize(-_transform.up));
-        }
+        public void MoveBackward() => Move(Vector3.Normalize(-_transform.up));
 
-        public void SpinClockWise()
-        {
-            Spin(Vector3.forward);
-        }
+        public void SpinClockWise() => Spin(Vector3.forward);
 
-        public void SpinAntiClockWise()
-        {
-            Spin(-Vector3.forward);
-        }
+        public void SpinAntiClockWise() => Spin(-Vector3.forward);
     }
 }
