@@ -18,6 +18,8 @@ namespace Commands.TankCommands
                     return new SpinClockwiseTankCommand(typeTankCommandAndKeyCode.KeyCode);
                 case TypeTankCommand.SpinAntiClockwise:
                     return new SpinAntiClockwiseTankCommand(typeTankCommandAndKeyCode.KeyCode);
+                case TypeTankCommand.Shoot:
+                    return new ShootTankCommand(typeTankCommandAndKeyCode.KeyCode);
                 default:
                     throw new ArgumentOutOfRangeException(
                         $"Not exist {typeTankCommandAndKeyCode.TypeTankCommand} command");

@@ -5,6 +5,7 @@ namespace Commands.TankCommands.Enums
         MoveForward,
         MoveBackward,
         SpinClockwise,
-        SpinAntiClockwise
+        SpinAntiClockwise,
+        Shoot
     }
 }

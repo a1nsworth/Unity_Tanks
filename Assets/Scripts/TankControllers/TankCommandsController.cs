@@ -11,7 +11,9 @@ namespace Controllers
 
         private void Processing()
         {
-            foreach (TankCommand command in _tank.TankCommandsAssignment)
+            foreach (TankCommand command in _tank.TankCommandsAssignmentComponent.TankCommandsAssignment ??
+                                            throw new NullReferenceException(nameof(_tank
+                                                .TankCommandsAssignmentComponent.TankCommandsAssignment)))
             {
                 if (Input.GetKey(command.KeyCode))
                 {
