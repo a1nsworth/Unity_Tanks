@@ -16,7 +16,7 @@ namespace Entities.Components
         public void Spin(Vector3 eulers) => Tank.transform.Rotate(eulers * (AngleRotation * Time.deltaTime));
 
         public void Move(Vector3 direct) =>
-            Tank.transform.Translate(direct * (MovementSpeed * Time.deltaTime), Space.World);
+            Tank.transform.Translate(direct * (MovementSpeed * Time.fixedDeltaTime), Space.World);
 
         public void MoveForward() => Move(Vector3.Normalize(Tank.transform.up));
 
