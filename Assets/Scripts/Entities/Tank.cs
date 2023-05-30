@@ -3,27 +3,35 @@ using Interfaces;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Entities.Components;
+using Unity.VisualScripting;
 
 namespace Entities
 {
     [Serializable]
     public class Tank : MonoBehaviour, IHittable
     {
+        [field: SerializeField] public TankMoveComponent TankMoveComponent { get; private set; }
+        [field: SerializeField] public TankShootComponent TankShootComponent { get; private set; }
+
+        [field: SerializeField]
+        public TankCommandsAssignmentComponent TankCommandsAssignmentComponent { get; private set; }
+
+        [field: SerializeField] public TankHealthBarComponent TankHealthBarComponent { get; private set; }
+        public TankHealthComponent TankHealthComponent { get; private set; }
+
         public Tank()
         {
             TankMoveComponent = new TankMoveComponent(this);
             TankShootComponent = new TankShootComponent(this);
             TankCommandsAssignmentComponent = new TankCommandsAssignmentComponent();
+            TankHealthComponent = new TankHealthComponent();
+            TankHealthBarComponent = new TankHealthBarComponent();
         }
 
-        private uint Health { get; set; } = 5;
-
-        [field: SerializeField] public TankMoveComponent TankMoveComponent { get; private set; }
-
-        [field: SerializeField] public TankShootComponent TankShootComponent { get; private set; }
-
-        [field: SerializeField]
-        public TankCommandsAssignmentComponent TankCommandsAssignmentComponent { get; private set; }
+        private void Awake()
+        {
+            TankHealthComponent.OnDamageTaken += TankHealthBarComponent.HealthBar.OnDamageTakenHandler;
+        }
 
         private void Start()
         {
@@ -31,24 +39,10 @@ namespace Entities
                 .TypeTankCommandAndKeyCodes);
         }
 
-        // Update is called once per frame
-        private void Update()
-        {
-        }
 
         public void TakeDamage(uint damage)
         {
-            if (Health != 0)
-            {
-                if (Health - (int)damage > 0)
-                {
-                    Health -= damage;
-                }
-                else
-                {
-                    Health = 0;
-                }
-            }
+            TankHealthComponent.TakeDamage(damage);
         }
 
         public void MoveForward() => TankMoveComponent.MoveForward();
@@ -56,5 +50,10 @@ namespace Entities
         public void SpinClockWise() => TankMoveComponent.SpinClockWise();
         public void SpinAntiClockWise() => TankMoveComponent.SpinAntiClockWise();
         public void Shoot() => TankShootComponent.Shoot();
+
+        private void OnDestroy()
+        {
+            TankHealthComponent.OnDamageTaken -= TankHealthBarComponent.HealthBar.OnDamageTakenHandler;
+        }
     }
 }

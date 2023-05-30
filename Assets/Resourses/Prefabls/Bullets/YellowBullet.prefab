@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb09a4895c0a43a38145c402dde0f687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <FlightSpeed>k__BackingField: 400
+  <Rigidbody2D>k__BackingField: {fileID: 306917474662657840}
+  <ForceFlight>k__BackingField: 800
   <Damage>k__BackingField: 1
 --- !u!50 &306917474662657840
 Rigidbody2D:
