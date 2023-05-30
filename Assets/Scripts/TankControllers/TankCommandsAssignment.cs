@@ -15,19 +15,15 @@ namespace TankControllers
 
         public TankCommandsAssignment() => _commands = new List<TankCommand>();
 
-        public TankCommandsAssignment(List<TypeTankCommandAndKeyCode> typeTankCommandAndKeyCodes)
+        public void FillCommands(List<TypeTankCommandAndKeyCode> typeTankCommandAndKeyCodes)
         {
-            foreach (var typeTankCommandAndKeyCode in typeTankCommandAndKeyCodes)
+            foreach (var typeTankCommandAndKeyCode in typeTankCommandAndKeyCodes ??
+                                                      throw new ArgumentNullException(
+                                                          nameof(typeTankCommandAndKeyCodes)))
             {
                 _commands.Add(
                     SimpleFactoryTankCommands.CreateTankCommand(typeTankCommandAndKeyCode));
             }
-        }
-
-        public TankCommandsAssignment(IEnumerable<TankCommand> commands)
-        {
-            foreach (var command in commands)
-                _commands.Add(command);
         }
 
         IEnumerator<TankCommand> IEnumerable<TankCommand>.GetEnumerator() => _commands.GetEnumerator();

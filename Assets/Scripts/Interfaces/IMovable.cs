@@ -4,6 +4,7 @@ namespace Interfaces
 {
     public interface IMovable
     {
-        void Move(Vector3 direct);
+        public void Move(Vector3 direct);
+        public void Spin(Vector3 eulers);
     }
 }
